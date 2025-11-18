@@ -133,11 +133,11 @@ def product_analysis(df, summary_file):
     ]
     choices = ['Star', 'Question Mark', 'Cash Cow']
     product_analysis['BCG_Category'] = np.select(conditions, choices, default='Dog')
-    print("===== Product Analysis =====")
+    print("\n===== Product Analysis =====")
     print("\nTop 10 Categories by Revenue:")
     print(product_analysis.head(10).to_string(index=False))
     
-    summary_file.write("===== Product Analysis =====\n")
+    summary_file.write("\n===== Product Analysis =====\n")
     summary_file.write("\nTop 10 Categories by Revenue:\n")
     summary_file.write(product_analysis.head(10).to_string(index=False))
     
