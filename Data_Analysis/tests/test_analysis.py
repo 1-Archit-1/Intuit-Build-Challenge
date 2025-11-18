@@ -2,9 +2,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from datetime import timedelta
-from utils import calculate_profitability_metrics, calculate_rfm, calculate_product_metrics
-
-
+import src
 @pytest.fixture
 def sample_df():
     np.random.seed(42)
@@ -29,7 +27,7 @@ def sample_df():
 
 
 def test_calculate_profitability_metrics(sample_df):
-    result = calculate_profitability_metrics(sample_df)
+    result = src.calculate_profitability_metrics(sample_df)
     
     assert 'Total_Sales' in result
     assert 'Total_Profit' in result
@@ -42,7 +40,7 @@ def test_calculate_rfm(sample_df):
     reference_date = sample_df['Order Date'].max() + pd.Timedelta(days=1)
     customer_data = sample_df[sample_df['Customer ID'] == sample_df['Customer ID'].iloc[0]]
     
-    result = calculate_rfm(customer_data, reference_date)
+    result = src.calculate_rfm(customer_data, reference_date)
     
     assert 'Recency' in result
     assert 'Frequency' in result
@@ -52,7 +50,7 @@ def test_calculate_rfm(sample_df):
 
 
 def test_calculate_product_metrics(sample_df):
-    result = calculate_product_metrics(sample_df)
+    result = src.calculate_product_metrics(sample_df)
     
     assert 'Revenue' in result
     assert 'Profit' in result
@@ -71,7 +69,7 @@ def test_handles_negative_profits():
         'Customer ID': ['C1', 'C2']
     })
     
-    result = calculate_profitability_metrics(loss_data)
+    result = src.calculate_profitability_metrics(loss_data)
     assert result['Total_Profit'] < 0
     assert result['Profitable_Orders_Pct'] == 0
 
@@ -84,7 +82,7 @@ def test_profit_margin_with_zero_sales():
         'Customer ID': ['C1']
     })
     
-    result = calculate_product_metrics(zero_sales)
+    result = src.calculate_product_metrics(zero_sales)
     assert result['Profit_Margin'] == 0
 
 

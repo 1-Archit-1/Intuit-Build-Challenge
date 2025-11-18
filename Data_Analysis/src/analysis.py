@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from utils import calculate_profitability_metrics, calculate_rfm, calculate_product_metrics
+from .utils import calculate_profitability_metrics, calculate_rfm, calculate_product_metrics
 
 
 def profitability_metrics(df, summary_file):
