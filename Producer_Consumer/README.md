@@ -10,7 +10,28 @@ A clean implementation of the producer-consumer pattern in Python using threads,
 - **Graceful shutdown** - Coordinated cleanup across all threads
 
 ## Requirements
-- Standard library only (no external dependencies)
+- pytest
+
+## Setup
+
+### 1. Create Virtual Environment
+
+```bash
+# Create virtual environment
+python3 -m venv analysis_env
+
+# Activate virtual environment
+# On Linux/Mac:
+source analysis_env/bin/activate
+
+# On Windows:
+prod_con_env\Scripts\activate
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
 
 ## Usage
 
