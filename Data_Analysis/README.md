@@ -71,19 +71,18 @@ pytest test_analysis.py::test_calculate_rfm -v
 ## Analysis Outputs
 
 ### 1. Profitability Analysis
-- Multi-level aggregation (Region → Category → Sub-Category)
+- Multi-level aggregation (Region -> Category -> Sub-Category)
 - Performance tier classification
 - Top/bottom performers
 
 ### 2. RFM Customer Segmentation
 - Recency, Frequency, Monetary scoring
-- Customer segment classification (Champions, At Risk, etc.)
+- Customer segment classification (Champions, At Risk, etc)
 - Top valuable customers
 
 ### 3. Product Portfolio Analysis
 - BCG Matrix classification (Stars, Cash Cows, Dogs, Question Marks)
 - Revenue and profit concentration
-- Pareto analysis (80/20 rule)
 
 ## Key Insights
 

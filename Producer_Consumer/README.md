@@ -4,8 +4,8 @@ A clean implementation of the producer-consumer pattern in Python using threads,
 
 ## Features
 
-- **Thread-safe** - Uses `queue.Queue`, `threading.Lock`, and `threading.Event`
-- **Multiple queues** - Single Consumer class handles one or many queues
+- **Thread-safe** 
+- **Multiple queues** - Handles one or many queues
 - **Blocking operations** - Proper backpressure and flow control
 - **Graceful shutdown** - Coordinated cleanup across all threads
 
@@ -32,29 +32,46 @@ prod_con_env\Scripts\activate
 
 ```bash
 pip install -r requirements.txt
+```
 
 ## Usage
 
 ### Run Demos
 
+The project includes 4 demo scenarios
+
 ```bash
 python3 producer_consumer.py
 ```
+
+**Demo 1: Basic Pattern**
+- Single producer, queue, single consumer
+
+**Demo 2: Multiple Producers and Consumers**
+- 3 producers, shared queue, 2 consumers
+
+**Demo 3: Fast Producer, Slow Consumer**
+- Fast producer with small queue size
+- queue blocking behavior
+
+**Demo 4: Multiple Queues**
+- 3 producers, 3 separate queues, 1 consumer(round robin)
 
 ### Run Tests
 
 ```bash
 # Run all tests
-python3 -m unittest tests.test_producer_consumer
+pytest tests/test_producer_consumer.py
 
 # Verbose output
-python3 -m unittest tests.test_producer_consumer -v
+pytest tests/test_producer_consumer.py -v
 
-# Run specific test class
-python3 -m unittest tests.test_producer_consumer.TestSystemSingleQueue
+# Run specific test function
+pytest tests/test_producer_consumer.py::test_item_has_correct_fields
 
-# Run individual test
-python3 -m unittest tests.test_producer_consumer.TestBasicModels.test_item_has_correct_fields
+
+# Show detailed output with print statements
+pytest tests/test_producer_consumer.py -v -s
 ```
 
 ## Quick Start
@@ -82,7 +99,7 @@ system.print_statistics()
 ### Multi-Queue
 
 ```python
-# 3 producers → 3 queues → 1 consumer
+# 3 producers -> 3 queues -> 1 consumer
 system = ProducerConsumerSystem()
 system.add_queue("q1", 5)
 system.add_queue("q2", 5)
@@ -98,26 +115,3 @@ system.add_consumer("C1", dest, 0.01, queue_names=["q1", "q2", "q3"])
 system.start()
 system.wait_for_completion()
 ```
-
-## Project Structure
-
-```
-Intuit_challenge/
-├── src/
-│   ├── models.py          # Item dataclass, ItemStatus enum
-│   ├── producer.py        # Producer thread
-│   ├── consumer.py        # Consumer thread
-│   ├── system.py          # ProducerConsumerSystem orchestrator
-│   └── demos.py           # Demo scenarios
-├── tests/
-│   └── test_producer_consumer.py  # unit tests
-├── producer_consumer.py   # Entry point
-└── README.md
-```
-
-## Thread Synchronization
-
-- **`queue.Queue`** - Blocking put/get operations
-- **`threading.Lock`** - Protects shared state
-- **`threading.Event`** - Signals for graceful shutdown
-- **`task_done()` / `join()`** - Wait/notify pattern

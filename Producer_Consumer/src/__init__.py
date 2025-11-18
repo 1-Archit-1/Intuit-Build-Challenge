@@ -1,7 +1,3 @@
-"""
-Producer-Consumer Pattern with Thread Synchronization
-"""
-
 from .models import Item, ItemStatus
 from .producer import Producer
 from .consumer import Consumer

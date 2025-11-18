@@ -11,7 +11,7 @@ class Producer(threading.Thread):
     """
     Producer thread that reads items from a source and places them into queues.
     - Thread synchronization
-    - Blocking queue operations (put with timeout)
+    - Blocking queue operations
     - Graceful shutdown
     """
     
